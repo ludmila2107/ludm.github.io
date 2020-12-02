@@ -1,0 +1,172 @@
+@bgcButtonDefault: rgb(63, 14, 175);
+@textColor: white;
+@pdVertButton: 10px;
+@pdHorButton: 15px;
+
+@bgText: lightgreen;
+
+@bgColor: rgb(127, 80, 131);
+@bdWidth: 2px;
+@bdStyle: solid;
+@bdColor: darken(@bgColor, 20%);
+
+@numberText: 1;
+
+.gradient(dark; @color1; @color2) {
+    background-image: linear-gradient(darken(@color1, 20%), darken(@color2, 20%));
+}
+
+.gradient(light; @color1; @color2) {
+    background-image: linear-gradient(lighten(@color1, 20%), lighten(@color2, 20%));
+}
+
+.gradient(normal; @color1; @color2) {
+    background-image: linear-gradient(@color1, @color2);
+}
+
+.gradient(contrast; @color1; @color2) {
+    background-image: linear-gradient(@color1, spin(@color2, 180));
+}
+
+.gradient(@_; @color1; @color2) {
+    color: white;
+    font-size: 20px;
+}
+
+.shadow(text; @blurShadow: 20px; @boxShadowColor: gold) {
+    box-shadow: 5px 5px @blurShadow @boxShadowColor;
+}
+
+.shadow(inset; @blurShadow: 20px; @boxShadowColor: gold) {
+    box-shadow: inset 5px 5px @blurShadow @boxShadowColor;
+}
+
+.shadow(@blurShadow: 15px; @boxShadowColor: rgb(219, 71, 157)) {
+    box-shadow: 0 0 @blurShadow @boxShadowColor;
+}
+
+.transform(@rotate: 3deg) {
+    transform: rotate(@rotate);
+}
+
+.intro {
+    @color1: rgb(31, 34, 226);
+    @color2: rgb(42, 214, 171);
+    .gradient(contrast; @color1; @color2);
+
+    width: 50%;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 15px;
+}
+
+.text {
+    margin: 30px;
+    padding: 10px;
+    color: contrast(@bgColor);
+    .shadow();
+}
+
+.circle {
+    padding: 30px;
+    border-radius: 50%;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.formattedText(@_; @numberText; @bdWidth; @bdStyle; @bdColor) when(@numberText <= 3) {
+    .text-@{numberText} {
+        &:hover {
+            // color: spin(@bgColor, 0);
+            cursor: pointer;
+        }
+    }
+    .formattedText(@_; @numberText + 1; @bdWidth; @bdStyle; @bdColor);
+}
+
+.formattedText(normal; @numberText; @bdWidth; @bdStyle; @bdColor) when(@numberText <= 3) {
+    .text-@{numberText} {
+        background-color: lighten(@bgColor, @numberText * 10);
+        border: @bdWidth * @numberText * 2 @bdStyle lighten(@bdColor, @numberText * 10);
+    }
+    .formattedText(normal; @numberText + 1; @bdWidth; @bdStyle; @bdColor);
+}
+
+.formattedText(square; @numberText; @bdWidth; @bdStyle; @bdColor) when(@numberText = 2) {
+    .text-@{numberText} when(@numberText = 2) {
+        .square();
+    }
+}
+
+.formattedText(circle; @numberText; @bdWidth; @bdStyle; @bdColor) when(@numberText = 3) {
+    .text-@{numberText} {
+        .circle();
+    }
+}
+
+.formattedText(normal; @numberText; @bdWidth; @bdStyle; @bdColor);
+.formattedText(square; @numberText; @bdWidth; @bdStyle; @bdColor);
+.formattedText(circle; @numberText; @bdWidth; @bdStyle; @bdColor);
+
+.btn {
+    @boxShadowColor: blue;
+    .shadow(10px; @boxShadowColor);
+    padding: @pdVertButton @pdHorButton;
+
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        background-color: spin(@bgcButtonDefault, 180);
+        outline: none;
+    }
+    &:focus {
+        outline: 2px solid gold;
+    }
+
+    &-default {
+        background-color: @bgcButtonDefault;
+        color: @textColor;
+        border: 2px solid lighten(@bgcButtonDefault, 20%);
+    }
+
+    &-big {
+        .shadow(40px; blue);
+        .transform(5deg);
+        padding: @pdVertButton + 10 @pdHorButton + 20;
+        border: 3px solid darken(spin(@bgcButtonDefault, 180), 10%);
+        
+        text-transform: uppercase;
+        font-family: bold;
+
+        background-color: spin(@bgcButtonDefault, 180);
+        color: @textColor;
+
+        &:active {
+            background-color: lighten(spin(@bgcButtonDefault, 180), 30%);
+            color: darken(@textColor, 80%)
+        }
+    }
+
+    &-small {
+        padding: @pdVertButton - 5 @pdHorButton - 10;
+        background-color: rgb(66, 3, 78);
+    }
+
+    &-link {
+        color: darken(@textColor, 70%);
+        border: none;
+        text-decoration: underline;
+        text-decoration-color: @bgcButtonDefault;
+        text-decoration-style: dotted;
+        background-color: mix(gold, red, 50%);
+
+        &:active {
+            color: @textColor;
+        }
+    }
+}

@@ -1,6 +1,6 @@
-@btnBuyColor: #c90909;
-@btnMoreColor: #287ecd;
-
+@btnBuyColor: hsl(0, 91%, 41%);
+@btnMoreColor: hsl(209, 67%, 48%);
+ 
 @bdRadBtn: 25px;
 @pdVertBtn: 10px;
 @pdHorizBtn: 60px;
@@ -12,36 +12,58 @@
 .btn {
     display: inline-block;
     padding: @pdVertBtn @pdHorizBtn;
-    border: none;
     border-radius: @bdRadBtn;
     font-family: @fontFamily;
-    font-weight: bold;
     font-size: @fontSizeBtn;
     text-transform: uppercase;
     text-decoration: none;
     color: @fontColorBtn;
-
+ 
     &-small {
         padding: @pdVertBtn + 5 @pdHorizBtn - 20;
     }
 
     &-buy {
         background-color: @btnBuyColor;
-
-        &:hover {
-            .hover(@btnBuyColor);
-        }
     }
  
     &-more {
         background-color: @btnMoreColor;
+    }
 
-        &:hover {
-            .hover(@btnMoreColor);
+    &:hover {
+        &:not(.btn-buy) {        
+            background-color: lighten(@btnMoreColor, 10%);
+            box-shadow: inset 0 0 0 3px @btnMoreColor;
+        }
+
+        &:not(.btn-more) {
+            background-color: lighten(@btnBuyColor, 10%);
+            box-shadow: inset 0 0 0 3px @btnBuyColor;            
         }
     }
 
-    .hover(@color) {
-        background-color: lighten(@color, 7%);
+    &:focus {
+        outline: none;
+
+        &:not(.btn-buy) {        
+            background-color: darken(@btnMoreColor, 10%);
+        }
+
+        &:not(.btn-more) {
+            background-color: darken(@btnBuyColor, 10%);
+        }        
+    }
+
+    &:active {
+        filter: grayscale(0.35);
+
+        &:not(.btn-buy) {        
+            background-color: desaturate(@btnMoreColor, 10%);
+        }
+
+        &:not(.btn-more) {
+            background-color: desaturate(@btnBuyColor, 10%);
+        }        
     }
 }

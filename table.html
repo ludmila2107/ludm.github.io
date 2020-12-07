@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание таблицы</title>
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"> -->
+
+    <link rel="stylesheet/less" href="css/table.less">
+</head>
+<body>
+    <form class="table-settings" method="get" action="#">
+        <fieldset>
+            <legend>Основные настройки</legend>
+            <div class="form-group">
+                <label for="tableName">Название таблицы: </label>
+                <input id="tableName" type="text" value="Сгенерированная таблица">
+            </div>
+            <div class="form-group">
+                <label for="numberRows">Кол-во строк: </label>
+                <input id="numberRows" type="number" min="1" max="20" value="5">
+            </div>
+            <div class="form-group">
+                <label for="numberColumns">Кол-во стобцов: </label>
+                <input id="numberColumns" type="number" min="1" max="10" value="3">
+            </div>
+            <div class="form-group">
+                <input id="moreSettings" type="checkbox">
+                <label for="moreSettings">Расширенные возможности: </label>
+            </div>
+        </fieldset>
+        <fieldset class="more-settings__hidden">
+            <legend>Параметры границы таблицы</legend>
+            <div class="form-group">
+                <label for="tableBorderWidth">Толщина: </label>
+                <input id="tableBorderWidth" type="number" min="1" max="10" value="3">
+
+                <label for="tableBorderType">Тип: </label>
+                <select class="table-border-type" name="tableBorderType" id="tableBorderType">
+                    <option value="solid">Сплошная</option>
+                    <option value="dotted">Точечная</option>
+                    <option value="dashed">Пунктирная</option>
+                    <option value="double">Двойная</option>
+                    <option value="groove">Объёмная</option>
+                </select>
+
+                <label for="tableBorderColor">Цвет: </label>
+                <input type="color" name="tableBorderColor" id="tableBorderColor" value="#0000ff">
+            </div>
+        </fieldset>
+        <fieldset class="more-settings__hidden">
+            <legend>Параметры ячеек и строк</legend>
+            <div class="form-group">
+                <label for="tableDataPadding">Внутренний отступ: </label>
+                <span>5px</span>
+                <input id="tableDataPadding" type="range" min="5" max="30" step="5" value="10">
+                <span>30px <em>(шаг 5px)</em></span>
+            </div>
+            <div class="form-group">
+                <label for="tableDataColor">Цвет фона ячеек: </label>
+                <input id="tableDataColor" type="color" value="#ffffff">
+                
+                <label for="tableFontSize">Размер шрифта: </label>
+                <select class="table-font-size" id="tableFontSize" name="tableFontSize">
+                    <option value="font-small">мелкий</option>
+                    <option value="font-medium">средний</option>
+                    <option value="font-normal">обычный</option>
+                    <option value="font-big">большой</option>
+                    <option value="font-extra-big">крупный</option>
+                </select>
+                
+                <label for="tableFontColor">Цвет текста: </label>
+                <input id="tableFontColor" type="color" value="#000000">
+            </div>
+            <div class="form-group">
+                <label>Рамка ячеек: </label>
+                <label for="tableDataWidth">толщина: </label>
+                <input id="tableDataWidth" type="number" min="1" max="5" value="1">
+                
+                <label for="dataBorderType">тип: </label>
+                <select class="data-border-type" name="dataBorderType" id="dataBorderType">
+                    <option value="solid">Сплошная</option>
+                    <option value="dotted" selected>Точечная</option>
+                    <option value="dashed">Пунктирная</option>
+                    <option value="double">Двойная</option>
+                    <option value="groove">Объёмная</option>
+                </select>
+                
+                <label for="dataBorderColor">цвет: </label>
+                <input type="color" name="dataBorderColor" id="dataBorderColor" value="#00ff00">
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Создание и удаление</legend>
+            <div class="form-group form-buttons">
+                <button class="btn btn-create" type="button">Создать таблицу</button>
+                <button class="btn btn-remove" type="button">Удалить таблицу</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="modal modal-hidden">
+        <p class="modal-title">Вы действительно хотите <br>создать таблицу?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-yes">Да, подтверждаю</button>
+            <button class="btn btn-no">Нет</button>
+        </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/less"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script> -->
+
+    <script src="js/createTable.js"></script>
+</body>
+</html>
